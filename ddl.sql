@@ -1,16 +1,36 @@
 CREATE TABLE roles (
     id SERIAL PRIMARY KEY,
-    rol VARCHAR(255)
+    rol VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE usuarios (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
-    rol_id int NOT NULL,
-    contraseña VARCHAR(255) NOT NULL,
-    FOREIGN KEY rol_id REFERENCES roles.id
+    contraseña VARCHAR(255) NOT NULL
 );
+
+CREATE TABLE permisos (
+    id SERIAL PRIMARY KEY,
+    permiso VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE roles_permisos (
+    id SERIAL PRIMARY KEY,
+    rol_id integer NOT NULL,
+    permiso_id integer NOT NULL,
+    FOREIGN KEY rol_id REFERENCES roles.id,
+    FOREIGN KEY permiso_id REFERENCES permisos.id
+);
+
+CREATE TABLE usuarios_roles (
+    id SERIAL PRIMARY KEY,
+    usuario_id integer NOT NULL,
+    rol_id integer NOT NULL,
+    FOREIGN KEY rol_id REFERENCES roles.id,
+    FOREIGN KEY usuario_id REFERENCES usuarios.id
+);
+
 
 CREATE TABLE materiales (
     id SERIAL PRIMARY KEY,
