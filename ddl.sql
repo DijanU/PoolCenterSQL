@@ -41,8 +41,8 @@ CREATE TABLE movimiento_materiales (
     material_id integer NOT NULL,
     tipo VARCHAR(255) NOT NULL,
     cantidad integer NOT NULL,
-    proveedor VARCHAR(255) NOT,
-    fecha date NOT NULL,
+    proveedor VARCHAR(255) NOT NULL,
+    fecha date NOT NULL, 
     FOREIGN KEY (material_id) REFERENCES materiales(id)
 );
 
