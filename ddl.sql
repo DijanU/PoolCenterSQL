@@ -19,16 +19,16 @@ CREATE TABLE roles_permisos (
     id SERIAL PRIMARY KEY,
     rol_id integer NOT NULL,
     permiso_id integer NOT NULL,
-    FOREIGN KEY rol_id REFERENCES roles.id,
-    FOREIGN KEY permiso_id REFERENCES permisos.id
+    FOREIGN KEY (rol_id) REFERENCES roles(id),
+    FOREIGN KEY (permiso_id) REFERENCES permisos(id)
 );
 
 CREATE TABLE usuarios_roles (
     id SERIAL PRIMARY KEY,
     usuario_id integer NOT NULL,
     rol_id integer NOT NULL,
-    FOREIGN KEY rol_id REFERENCES roles.id,
-    FOREIGN KEY usuario_id REFERENCES usuarios.id
+    FOREIGN KEY (rol_id) REFERENCES roles(id),
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );
 
 CREATE TABLE materiales (
@@ -43,7 +43,7 @@ CREATE TABLE movimiento_materiales (
     cantidad integer NOT NULL,
     proveedor VARCHAR(255) NOT,
     fecha date NOT NULL,
-    FOREIGN KEY material_id REFERENCES materiales.id
+    FOREIGN KEY (material_id) REFERENCES materiales(id)
 );
 
 CREATE TABLE proyectos (
@@ -65,8 +65,8 @@ CREATE TABLE material_proyecto (
     comprado INT NOT NULL CHECK (comprado > 0),
     obra INT NOT NULL CHECK (obra > 0),
     bodega INT NOT NULL CHECK (bodega > 0),
-    FOREIGN KEY material_id REFERENCES materiales.id,
-    FOREIGN KEY proyecto_id REFERENCES proyectos.id
+    FOREIGN KEY (material_id) REFERENCES materiales(id),
+    FOREIGN KEY (proyecto_id) REFERENCES proyectos(id)
 );
 
 CREATE TABLE bodega_proyecto (
@@ -76,8 +76,8 @@ CREATE TABLE bodega_proyecto (
     cantidad integer NOT NULL,
     proyecto_id integer NOT NULL,
     fecha date NOT NULL,
-    FOREIGN KEY material_id REFERENCES materiales.id,
-    FOREIGN KEY proyecto_id REFERENCES proyectos.id
+    FOREIGN KEY (material_id) REFERENCES materiales(id),
+    FOREIGN KEY (proyecto_id) REFERENCES proyectos(id)
 );
 
 CREATE TABLE reportes ( 
@@ -85,5 +85,5 @@ CREATE TABLE reportes (
     proyecto_id INT NOT NULL,
     fecha DATE NOT NULL,
     contenido TEXT,
-    FOREIGN KEY proyecto_id REFERENCES proyectos.id
+    FOREIGN KEY (proyecto_id) REFERENCES proyectos(id)
 );
